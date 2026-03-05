@@ -41,5 +41,4 @@ public class Livro {
     @JoinTable(name = "cliente_livro", joinColumns = @JoinColumn(name = "livro_id"), inverseJoinColumns = @JoinColumn(name = "cliente_id"))
     private List<Cliente> clientes = new ArrayList<>();
 
-
 }

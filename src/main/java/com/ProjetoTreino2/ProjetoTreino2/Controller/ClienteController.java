@@ -22,7 +22,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 @RestController
 @RequestMapping("/api/clientes")
 public class ClienteController {
-    
+
     private final ClienteService clienteService;
 
     public ClienteController(ClienteService clienteService) {
@@ -32,15 +32,15 @@ public class ClienteController {
     @PostMapping("/create")
     public ResponseEntity<String> create(@Valid @RequestBody ClienteDTO clientedto) {
 
-            clienteService.create(clientedto);
-            return ResponseEntity.ok("Cliente criado com sucesso!");
+        clienteService.create(clientedto);
+        return ResponseEntity.ok("Cliente criado com sucesso!");
 
     }
 
     @PutMapping("/update/{id}")
     public ResponseEntity<String> update(@Valid @RequestBody ClienteDTO clienteDTO, @PathVariable Long id) {
-            clienteService.update(clienteDTO, id);
-            return ResponseEntity.ok("Cliente atualizado com sucesso!");
+        clienteService.update(clienteDTO, id);
+        return ResponseEntity.ok("Cliente atualizado com sucesso!");
     }
 
     @GetMapping("/findAll")
@@ -56,17 +56,16 @@ public class ClienteController {
 
     @DeleteMapping("/delete/{id}")
     public ResponseEntity<String> delete(@PathVariable Long id) {
-            clienteService.delete(id);
-            return ResponseEntity.ok("Cliente deletado com sucesso!");
-        
+        clienteService.delete(id);
+        return ResponseEntity.ok("Cliente deletado com sucesso!");
+
     }
 
     @GetMapping("/findById/{id}")
     public ResponseEntity<ClienteResponseDTO> findById(@PathVariable Long id) {
 
-            ClienteResponseDTO cliente = clienteService.findById(id);
-            return ResponseEntity.ok(cliente);
-        
+        ClienteResponseDTO cliente = clienteService.findById(id);
+        return ResponseEntity.ok(cliente);
 
     }
 

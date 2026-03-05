@@ -15,7 +15,6 @@ import lombok.Setter;
 public class AutorDTO {
     private Long id;
 
-
     @Pattern(regexp = "^[A-Za-zÀ-ÿ ]+$", message = "Nome deve conter apenas letras")
     @NotBlank(message = "O nome do autor é obrigatório")
     private String nome;

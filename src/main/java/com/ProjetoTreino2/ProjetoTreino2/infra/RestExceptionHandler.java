@@ -16,7 +16,7 @@ import jakarta.validation.ConstraintViolationException;
 import org.springframework.http.HttpStatus;
 
 @RestControllerAdvice
-public class RestExceptionHandler{
+public class RestExceptionHandler {
 
     @ExceptionHandler(MethodArgumentNotValidException.class)
     public ResponseEntity<ErrorResponseDTO> handleValidation(
@@ -32,8 +32,7 @@ public class RestExceptionHandler{
                 .body(new ErrorResponseDTO(
                         400,
                         mensagem,
-                        request.getRequestURI()
-                ));
+                        request.getRequestURI()));
     }
 
     @ExceptionHandler(ConstraintViolationException.class)
@@ -41,14 +40,14 @@ public class RestExceptionHandler{
             ConstraintViolationException ex,
             HttpServletRequest request) {
 
-        String mensagem = ("Termo de Requisição inválido: " + ex.getConstraintViolations().iterator().next().getMessage());
+        String mensagem = ("Termo de Requisição inválido: "
+                + ex.getConstraintViolations().iterator().next().getMessage());
 
         return ResponseEntity.badRequest()
                 .body(new ErrorResponseDTO(
                         400,
                         mensagem,
-                        request.getRequestURI()
-                ));
+                        request.getRequestURI()));
     }
 
     @ExceptionHandler(MethodArgumentTypeMismatchException.class)
@@ -62,8 +61,7 @@ public class RestExceptionHandler{
                 .body(new ErrorResponseDTO(
                         400,
                         mensagem,
-                        request.getRequestURI()
-                ));
+                        request.getRequestURI()));
     }
 
     @ExceptionHandler(HttpMessageNotReadableException.class)
@@ -77,10 +75,8 @@ public class RestExceptionHandler{
                 .body(new ErrorResponseDTO(
                         400,
                         mensagem,
-                        request.getRequestURI()
-                ));
+                        request.getRequestURI()));
     }
-
 
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     @ExceptionHandler(AnoPublicacaoInvalidoException.class)
@@ -149,5 +145,4 @@ public class RestExceptionHandler{
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(ex.getMessage());
     }
 
-    
 }

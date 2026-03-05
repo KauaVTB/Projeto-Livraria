@@ -24,7 +24,7 @@ public class LivroDTO {
 
     @NotNull(message = "O campo anoPublicacao é obrigatório.")
     private Integer anoPublicacao;
-    
+
     private List<Long> cliente_id;
 
 }

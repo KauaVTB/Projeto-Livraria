@@ -15,9 +15,9 @@ import com.ProjetoTreino2.ProjetoTreino2.Repository.LivroRepository;
 
 @Service
 public class ClienteService {
-    
+
     private final ClienteRepository clienteRepository;
-   
+
     private final LivroRepository livroRepository;
 
     public ClienteService(ClienteRepository clienteRepository, LivroRepository livroRepository) {
@@ -46,8 +46,8 @@ public class ClienteService {
 
     public ClienteResponseDTO findById(Long id) {
         Cliente cliente = clienteRepository.findById(id).orElseThrow(() -> new ClienteNotFoundException());
-        
-        return new  ClienteResponseDTO(
+
+        return new ClienteResponseDTO(
                 cliente.getId(),
                 cliente.getNome(),
                 cliente.getEmail(),
@@ -67,17 +67,17 @@ public class ClienteService {
 
     public ClienteDTO update(@RequestBody ClienteDTO clienteDTO, Long id) {
         Cliente cliente = clienteRepository.findById(id).orElseThrow(() -> new ClienteNotFoundException());
-        
-            List<Livro> livros = livroRepository.findAllById(clienteDTO.getLivro_id());
-            cliente.setNome(clienteDTO.getNome());
-            cliente.setEmail(clienteDTO.getEmail());
-            cliente.setLivros(livros);
-            return new ClienteDTO(
-                    cliente.getId(),
-                    cliente.getNome(),
-                    cliente.getEmail(),
-                    cliente.getLivros().stream().map(Livro::getId).toList());
-        
+
+        List<Livro> livros = livroRepository.findAllById(clienteDTO.getLivro_id());
+        cliente.setNome(clienteDTO.getNome());
+        cliente.setEmail(clienteDTO.getEmail());
+        cliente.setLivros(livros);
+        return new ClienteDTO(
+                cliente.getId(),
+                cliente.getNome(),
+                cliente.getEmail(),
+                cliente.getLivros().stream().map(Livro::getId).toList());
+
     }
 
     public void delete(Long id) {

@@ -12,9 +12,10 @@ import com.ProjetoTreino2.ProjetoTreino2.dto.AutorResponseDTO;
 
 @Service
 public class AutorService {
-        
+
         private final AutorRepository autorRepository;
         private final LivroRepository livroRepository;
+
         public AutorService(AutorRepository autorRepository, LivroRepository livroRepository) {
                 this.autorRepository = autorRepository;
                 this.livroRepository = livroRepository;
@@ -26,7 +27,7 @@ public class AutorService {
                                 autor.getId(),
                                 autor.getNome(),
                                 autor.getLivros().stream().map(livro -> livro.getTitulo()).toList());
-                                
+
         }
 
         public AutorDTO create(AutorDTO autorDTO) {
@@ -34,9 +35,9 @@ public class AutorService {
                 autor.setId(autorDTO.getId());
                 autor.setNome(autorDTO.getNome());
                 if (autorDTO.getLivros() != null && !autorDTO.getLivros().isEmpty()) {
-            autor.setLivros(
-                    livroRepository.findAllById(autorDTO.getLivros()));
-        } 
+                        autor.setLivros(
+                                        livroRepository.findAllById(autorDTO.getLivros()));
+                }
                 autorRepository.save(autor);
                 return new AutorDTO(
                                 autor.getId(),
@@ -46,12 +47,12 @@ public class AutorService {
 
         public AutorDTO update(AutorDTO autorDTO, Long id) {
                 Autor autor = autorRepository.findById(id).orElseThrow(() -> new AutorNotFoundException());
-                        autor.setNome(autorDTO.getNome());
-                        return new AutorDTO(
-                                        autor.getId(),
-                                        autor.getNome(),
-                                        autor.getLivros().stream().map(livro -> livro.getId()).toList());
-                
+                autor.setNome(autorDTO.getNome());
+                return new AutorDTO(
+                                autor.getId(),
+                                autor.getNome(),
+                                autor.getLivros().stream().map(livro -> livro.getId()).toList());
+
         }
 
         public void delete(Long id) {

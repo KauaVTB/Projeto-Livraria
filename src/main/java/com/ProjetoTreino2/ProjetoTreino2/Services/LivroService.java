@@ -50,7 +50,7 @@ public class LivroService {
         if (livroDTO.getCliente_id() != null && !livroDTO.getCliente_id().isEmpty()) {
             livro.setClientes(
                     clienteRepository.findAllById(livroDTO.getCliente_id()));
-        } 
+        }
         verifyPublicationDate(livroDTO.getAnoPublicacao());
         Livro salvo = livroRepository.save(livro);
 
@@ -89,7 +89,8 @@ public class LivroService {
         Livro livro = livroRepository.findById(id).orElseThrow(() -> new LivroNotFoundException());
 
         livro.setTitulo(livroDTO.getTitulo());
-        livro.setAutor(autorRepository.findById(livroDTO.getAutor_id()).orElseThrow(() -> new AutorNotFoundException()));
+        livro.setAutor(
+                autorRepository.findById(livroDTO.getAutor_id()).orElseThrow(() -> new AutorNotFoundException()));
         livro.setAnoPublicacao(livroDTO.getAnoPublicacao());
         livro.setClientes(clienteRepository.findAllById(livroDTO.getCliente_id()));
 
@@ -110,7 +111,7 @@ public class LivroService {
 
     public LivroResponseDTO findByTitulo(String titulo) {
         Livro livro = livroRepository.findByTitulo(titulo).orElseThrow(() -> new LivroNotFoundException());
-        
+
         return new LivroResponseDTO(
                 livro.getId(),
                 livro.getTitulo(),
@@ -120,12 +121,12 @@ public class LivroService {
     }
 
     public List<LivroResponseDTO> findByAnoPublicacao(int anoPublicacao) {
-        
+
         List<Livro> livros = livroRepository.findByAnoPublicacao(anoPublicacao).orElse(null);
         if (livros.isEmpty()) {
             throw new LivroNotFoundException();
         }
-        
+
         return livros.stream()
                 .map(livro -> new LivroResponseDTO(
                         livro.getId(),
@@ -136,11 +137,9 @@ public class LivroService {
                 .toList();
     }
 
-
- 
     public List<LivroResponseDTO> findByAutor(long id) {
         List<Livro> livros = livroRepository.findByAutorId(id).orElseThrow(() -> new LivroNotFoundException());
-        
+
         return livros.stream()
                 .map(livro -> new LivroResponseDTO(
                         livro.getId(),
