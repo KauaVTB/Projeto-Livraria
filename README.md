@@ -184,14 +184,14 @@ POST /auth/register
 
 ---
 
-## 🔒 Observações de segurança
+##  Observações de segurança
 
 - Todas as rotas protegidas exigem JWT válido no header.
 - `POST /auth/login` é público (sem token).
 
 ---
 
-## 🧪 Testes
+##  Testes
 ```bash
 # Windows
 mvnw.cmd test
